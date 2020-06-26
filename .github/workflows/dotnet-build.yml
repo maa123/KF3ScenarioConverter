@@ -65,7 +65,7 @@ jobs:
     - name: mkdir
       run: md bin\Release\publish
     - name: Build
-      run: dotnet publish /p:PublishProfile=Properties\PublishProfiles\FolderProfile.pubxml
+      run: dotnet publish -c Release -r win10-x64 /p:PublishSingleFile=true /p:PublishReadyToRun=true /p:PublishTrimmed=true -o bin\Release\publish
 
 
     # Upload the MSIX package: https://github.com/marketplace/actions/upload-artifact
