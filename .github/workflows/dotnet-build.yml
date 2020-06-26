@@ -62,6 +62,8 @@ jobs:
 
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@2008f912f56e61277eefaac6d1888b750582aa16
+    - name: mkdir
+      run: md bin\Release\publish
     - name: Build
       run: dotnet publish /p:PublishProfile=Properties\PublishProfiles\FolderProfile.pubxml
 
