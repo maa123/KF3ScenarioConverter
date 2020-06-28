@@ -48,6 +48,10 @@ jobs:
 
   build:
     runs-on: windows-latest  # For a list of available runner types, refer to 
+    env: 
+        VCTargetsPath: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Microsoft\VC\v160\'
+        WindowsSdkDir: 'C:\Program Files (x86)\Windows Kits\10\'
+        VCToolsInstallDir: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.26.28801\'
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -64,8 +68,8 @@ jobs:
       uses: microsoft/setup-msbuild@2008f912f56e61277eefaac6d1888b750582aa16
     - name: mkdir
       run: md bin\Release\publish
-    - name: set VCTargetsPath
-      run: 'set VCTargetsPath="C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Microsoft\VC\v160\"'
+    #- name: set VCTargetsPath
+    #  run: 'set VCTargetsPath="C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Microsoft\VC\v160\"'
       #C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\MSBuild.exe
       ##MSBuild\Microsoft\VC\v160
     - name: restore
@@ -76,10 +80,7 @@ jobs:
       run: 'msbuild KF3ScenarioConverter.sln /t:build /p:Configuration=Release /p:Platform="Any CPU"'
     - name: Publish
       run: 'dotnet publish -c Release -r win10-x64 /p:PublishSingleFile=true /p:PublishReadyToRun=true /p:PublishTrimmed=true -o bin\Release\publish'
-      env: 
-        VCTargetsPath: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Microsoft\VC\v160\'
-        WindowsSdkDir: 'C:\Program Files (x86)\Windows Kits\10\'
-        VCToolsInstallDir: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.26.28801\'
+      
 
 
     # Upload the MSIX package: https://github.com/marketplace/actions/upload-artifact
