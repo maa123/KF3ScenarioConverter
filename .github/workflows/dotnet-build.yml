@@ -78,6 +78,8 @@ jobs:
       run: dir "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC"
     #- name: msbuild
     #  run: 'msbuild KF3ScenarioConverter.sln /t:build /p:Configuration=Release /p:Platform="Any CPU" /optimize'
+    - name: clean
+      run: dotnet clean
     - name: build
       run: dotnet build -c Release -r win10-x64
     #- name: Publish
