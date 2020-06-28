@@ -74,6 +74,8 @@ jobs:
       run: 'msbuild KF3ScenarioConverter.sln /t:build /p:Configuration=Release /p:Platform="Any CPU"'
     - name: Publish
       run: dotnet publish -c Release -r win10-x64 /p:PublishSingleFile=true /p:PublishReadyToRun=true /p:PublishTrimmed=true -o bin\Release\publish
+      env: 
+        VCTargetsPath: "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\VC\v160"
 
 
     # Upload the MSIX package: https://github.com/marketplace/actions/upload-artifact
