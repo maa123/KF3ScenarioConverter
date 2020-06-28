@@ -64,8 +64,8 @@ jobs:
       uses: microsoft/setup-msbuild@2008f912f56e61277eefaac6d1888b750582aa16
     - name: mkdir
       run: md bin\Release\publish
-    - name: Build
-      run: dotnet build -c Release -r win10-x64
+    - name: set VCTargetsPath
+      run: 'set VCTargetsPath="C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\v140"'
     - name: Publish
       run: dotnet publish -c Release -r win10-x64 /p:PublishSingleFile=true /p:PublishReadyToRun=true /p:PublishTrimmed=true -o bin\Release\publish
 
