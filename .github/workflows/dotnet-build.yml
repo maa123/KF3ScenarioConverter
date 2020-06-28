@@ -77,7 +77,7 @@ jobs:
     - name: check
       run: dir "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC"
     - name: msbuild
-      run: 'msbuild KF3ScenarioConverter.sln /t:build /p:Configuration=Release /p:Platform="Any CPU" /optimize /p:AllowedReferenceRelatedFileExtensions=".pdb"'
+      run: 'msbuild KF3ScenarioConverter.sln /t:build /p:Configuration=Release /p:Platform="Any CPU" /p:AllowedReferenceRelatedFileExtensions=".pdb"'
     - name: clean
       run: dotnet clean
     - name: build
