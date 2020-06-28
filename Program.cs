@@ -32,6 +32,7 @@ namespace KF3ScenarioConverter {
                     }
                 }
                 if (mB != null) {
+                    Console.OutputEncoding = new System.Text.UTF8Encoding();
                     if (textMode) {
                         Console.Write(mB.DumpText());
                     } else {
@@ -44,7 +45,6 @@ namespace KF3ScenarioConverter {
             AssetsManager aM = new AssetsManager();
             aM.LoadFiles(args[0]);
             if (aM.assetsFileList.Count == 1) {
-                MonoBehaviour mB = null;
                 foreach (var asset in aM.assetsFileList[0].Objects) {
                     switch (asset) {
                         case Texture2D m_Texture2D:
