@@ -71,13 +71,15 @@ jobs:
     - name: restore
       run: dotnet restore
     - name: check
-      run: dir "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Microsoft\VC"
+      run: dir "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC"
     - name: msbuild
       run: 'msbuild KF3ScenarioConverter.sln /t:build /p:Configuration=Release /p:Platform="Any CPU"'
     - name: Publish
-      run: '& "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\Tools\vsdevcmd\core\dotnet.bat" publish -c Release -r win10-x64 /p:PublishSingleFile=true /p:PublishReadyToRun=true /p:PublishTrimmed=true -o bin\Release\publish'
-      #env: 
-      #  VCTargetsPath: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Microsoft\VC\v160\'
+      run: 'dotnet publish -c Release -r win10-x64 /p:PublishSingleFile=true /p:PublishReadyToRun=true /p:PublishTrimmed=true -o bin\Release\publish'
+      env: 
+        VCTargetsPath: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Microsoft\VC\v160\'
+        WindowsSdkDir: 'C:\Program Files (x86)\Windows Kits\10\'
+        VCToolsInstallDir: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.26.28801\'
 
 
     # Upload the MSIX package: https://github.com/marketplace/actions/upload-artifact
