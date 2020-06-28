@@ -70,6 +70,8 @@ jobs:
       ##MSBuild\Microsoft\VC\v160
     - name: restore
       run: dotnet restore
+    - name: check
+      run: dir "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\VC"
     - name: msbuild
       run: 'msbuild KF3ScenarioConverter.sln /t:build /p:Configuration=Release /p:Platform="Any CPU"'
     - name: Publish
