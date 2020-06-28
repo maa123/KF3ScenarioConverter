@@ -77,7 +77,7 @@ jobs:
     - name: check
       run: dir "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC"
     - name: msbuild
-      run: 'msbuild KF3ScenarioConverter.sln /t:build /p:Configuration=Release /p:Platform="Any CPU" /p:AllowedReferenceRelatedFileExtensions=".pdb"'
+      run: 'msbuild KF3ScenarioConverter.sln /t:build /p:Configuration=Release /p:Platform="x64" /p:AllowedReferenceRelatedFileExtensions=".pdb"'
     - name: dir
       run: dir
     #- name: clean
@@ -94,5 +94,5 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: kf3converter
-        path: Release
+        path: bin
         #path: bin\Release\publish
