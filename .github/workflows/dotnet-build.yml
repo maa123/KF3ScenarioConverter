@@ -65,19 +65,19 @@ jobs:
     - name: mkdir
       run: md bin\Release\publish
     - name: set VCTargetsPath
-      run: 'set VCTargetsPath="C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\VC\v160"'
+      run: 'set VCTargetsPath="C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Microsoft\VC\v160"'
       #C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\MSBuild.exe
       ##MSBuild\Microsoft\VC\v160
     - name: restore
       run: dotnet restore
     - name: check
-      run: dir "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\VC"
+      run: dir "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Microsoft\VC"
     - name: msbuild
       run: 'msbuild KF3ScenarioConverter.sln /t:build /p:Configuration=Release /p:Platform="Any CPU"'
     - name: Publish
       run: dotnet publish -c Release -r win10-x64 /p:PublishSingleFile=true /p:PublishReadyToRun=true /p:PublishTrimmed=true -o bin\Release\publish
       env: 
-        VCTargetsPath: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\VC\v160'
+        VCTargetsPath: 'C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Microsoft\VC\v160'
 
 
     # Upload the MSIX package: https://github.com/marketplace/actions/upload-artifact
