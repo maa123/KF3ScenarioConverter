@@ -64,10 +64,9 @@ jobs:
       uses: microsoft/setup-msbuild@2008f912f56e61277eefaac6d1888b750582aa16
     - name: mkdir
       run: md bin\Release\publish
-    - name: msbuild
-      run: msbuild KF3ScenarioConverter.sln
-      shell: cmd
     - name: Build
+      run: dotnet build -c Release -r win10-x64
+    - name: Publish
       run: dotnet publish -c Release -r win10-x64 /p:PublishSingleFile=true /p:PublishReadyToRun=true /p:PublishTrimmed=true -o bin\Release\publish
 
 
