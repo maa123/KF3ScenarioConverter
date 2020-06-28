@@ -66,6 +66,10 @@ jobs:
       run: md bin\Release\publish
     - name: set VCTargetsPath
       run: 'set VCTargetsPath="C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\v140"'
+    - name: restore
+      run: dotnet restore
+    - name: msbuild
+      run: msbuild KF3ScenarioConverter.sln -c Release -r win10-x64
     - name: Publish
       run: dotnet publish -c Release -r win10-x64 /p:PublishSingleFile=true /p:PublishReadyToRun=true /p:PublishTrimmed=true -o bin\Release\publish
 
