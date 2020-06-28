@@ -76,10 +76,10 @@ jobs:
       run: dotnet restore
     - name: check
       run: dir "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC"
-    - name: msbuild
-      run: 'msbuild KF3ScenarioConverter.sln /t:build /p:Configuration=Release /p:Platform="Any CPU"'
-    #- name: build
-    #  run: dotnet build KF3ScenarioConverter.sln -c Release -r win10-x64
+    #- name: msbuild
+    #  run: 'msbuild KF3ScenarioConverter.sln /t:build /p:Configuration=Release /p:Platform="Any CPU" /optimize'
+    - name: build
+      run: dotnet build -c Release -r win10-x64
     #- name: Publish
     #  run: 'dotnet publish -c Release -r win10-x64 /p:PublishSingleFile=true /p:PublishReadyToRun=true /p:PublishTrimmed=true -o bin\Release\publish'
       
