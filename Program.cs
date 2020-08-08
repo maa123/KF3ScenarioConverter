@@ -7,59 +7,48 @@ using AssetStudio;
 namespace KF3ScenarioConverter {
     class Program {
         static void Main(string[] args) {
+            //全てTEXTMODEとして扱う
+            //Output以下に出力し、拡張子は.txtとする
             if (args.Length < 1) {
                 return;
             }
-            bool textMode = false;
-            if (args.Length > 1) {
-                if (args[1] == "text") {
-                    textMode = true;
-                }
-                if (args[1] == "image") {
-                    Img(args);
-                    return;
-                }
+            foreach(var filepath in args) {
+                Console.WriteLine(filepath);
+                Convert(filepath);
             }
+            Console.ReadKey();
+        }
+
+        static void Convert(string filepath) {
             AssetsManager aM = new AssetsManager();
-            aM.LoadFiles(args[0]);
+            aM.LoadFiles(filepath);
             if (aM.assetsFileList.Count == 1) {
                 MonoBehaviour mB = null;
                 foreach (var asset in aM.assetsFileList[0].Objects) {
-                    switch (asset) {
+                    switch(asset) {
                         case MonoBehaviour m_MonoBehaviour:
                             mB = m_MonoBehaviour;
                             break;
                     }
                 }
-                if (mB != null) {
-                    Console.OutputEncoding = new System.Text.UTF8Encoding();
-                    if (textMode) {
-                        Console.Write(mB.DumpText());
-                    } else {
-                        Console.Write(mB.Dump());
+                if(mB != null) {
+                    var filename = "./output/" + Path.GetFileNameWithoutExtension(filepath) + ".txt";
+                    if (ExportFileExists(filename)) {
+                        aM.Clear();
+                        return;
                     }
+                    var file = new System.IO.StreamWriter(filename);
+                    Console.WriteLine(filename);
+                    file.Write(mB.DumpText());
+                    file.Close();
+                    aM.Clear();
+                    return;
+                } else {
+                    aM.Clear();
                 }
+            } else {
+                aM.Clear();
             }
-        }
-        static void Img(string[] args) {
-            AssetsManager aM = new AssetsManager();
-            aM.LoadFiles(args[0]);
-            if (aM.assetsFileList.Count == 1) {
-                foreach (var asset in aM.assetsFileList[0].Objects) {
-                    switch (asset) {
-                        case Texture2D m_Texture2D:
-                            var filename = "./output/" + m_Texture2D.m_Name + ".png";
-                            var bitmap = m_Texture2D.ConvertToBitmap(true);
-                            if (ExportFileExists(filename)) {
-                                continue;
-                            }
-                            bitmap.Save(filename, ImageFormat.Png);
-                            bitmap.Dispose();
-                            break;
-                    }
-                }
-            }
-            return;
         }
         private static bool ExportFileExists(string filename) {
             if (File.Exists(filename)) {
