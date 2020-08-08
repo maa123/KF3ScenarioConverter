@@ -13,10 +13,8 @@ namespace KF3ScenarioConverter {
                 return;
             }
             foreach(var filepath in args) {
-                Console.WriteLine(filepath);
                 Convert(filepath);
             }
-            Console.ReadKey();
         }
 
         static void Convert(string filepath) {
@@ -38,7 +36,6 @@ namespace KF3ScenarioConverter {
                         return;
                     }
                     var file = new System.IO.StreamWriter(filename);
-                    Console.WriteLine(filename);
                     file.Write(mB.DumpText());
                     file.Close();
                     aM.Clear();
