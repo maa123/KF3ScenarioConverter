@@ -65,7 +65,7 @@ jobs:
         dotnet-version: 3.1.101
 
     - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@2008f912f56e61277eefaac6d1888b750582aa16
+      uses: microsoft/setup-msbuild@v1
     - name: mkdir
       run: md bin\Release\publish
     #- name: set VCTargetsPath
